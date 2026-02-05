@@ -27,7 +27,7 @@ regd_users.post("/register", (req, res) => {
   }
 
   users.push({"username": username, "password": password});
-  return res.status(200).json({message: "User successfully registered. Now you can login"});
+  return res.status(200).json({message: "Customer successfully registered. Now you can login"});
 });
 
 // Only registered users can login
@@ -47,7 +47,7 @@ regd_users.post("/login", (req, res) => {
     req.session.authorization = {
       accessToken, username
     }
-    return res.status(200).json({message: "User successfully logged in"});
+    return res.status(200).json({message: "Login successful!"});
   } else {
     return res.status(401).json({message: "Invalid username or password"});
   }
@@ -70,7 +70,7 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
   books[isbn].reviews[username] = review;
   
   return res.status(200).json({
-    message: "Review successfully added/updated",
+    message: `Review for ISBN ${isbn} added/updated`,
     reviews: books[isbn].reviews
   });
 });
@@ -87,8 +87,7 @@ regd_users.delete("/auth/review/:isbn", (req, res) => {
   if (books[isbn].reviews[username]) {
     delete books[isbn].reviews[username];
     return res.status(200).json({
-      message: "Review successfully deleted",
-      reviews: books[isbn].reviews
+      message: `Review for ISBN ${isbn} deleted`
     });
   } else {
     return res.status(404).json({message: "Review not found"});
