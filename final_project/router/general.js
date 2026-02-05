@@ -72,8 +72,8 @@ public_users.get('/review/:isbn', function (req, res) {
 // TASKS 10-13: Using Async-Await with Axios
 // ============================================
 
-// Task 10: Get all books using async-await with Axios
-public_users.get('/axios', async function (req, res) {
+// Task 10: Get all books using async callback with Axios
+public_users.get('/async', async function (req, res) {
   try {
     const response = await axios.get(`${BASE_URL}/`);
     res.send(JSON.stringify(response.data, null, 4));
@@ -82,8 +82,8 @@ public_users.get('/axios', async function (req, res) {
   }
 });
 
-// Task 11: Get book details based on ISBN using async-await with Axios
-public_users.get('/axios/isbn/:isbn', async function (req, res) {
+// Task 11: Search by ISBN using async callback with Axios
+public_users.get('/async/isbn/:isbn', async function (req, res) {
   try {
     const isbn = req.params.isbn;
     const response = await axios.get(`${BASE_URL}/isbn/${isbn}`);
@@ -97,11 +97,11 @@ public_users.get('/axios/isbn/:isbn', async function (req, res) {
   }
 });
 
-// Task 12: Get book details based on Author using async-await with Axios
-public_users.get('/axios/author/:author', async function (req, res) {
+// Task 12: Search by Author using async callback with Axios
+public_users.get('/async/author/:author', async function (req, res) {
   try {
     const author = req.params.author;
-    const response = await axios.get(`${BASE_URL}/author/${author}`);
+    const response = await axios.get(`${BASE_URL}/author/${encodeURIComponent(author)}`);
     res.send(JSON.stringify(response.data, null, 4));
   } catch (error) {
     if (error.response && error.response.status === 404) {
@@ -112,11 +112,11 @@ public_users.get('/axios/author/:author', async function (req, res) {
   }
 });
 
-// Task 13: Get book details based on Title using async-await with Axios
-public_users.get('/axios/title/:title', async function (req, res) {
+// Task 13: Search by Title using async callback with Axios
+public_users.get('/async/title/:title', async function (req, res) {
   try {
     const title = req.params.title;
-    const response = await axios.get(`${BASE_URL}/title/${title}`);
+    const response = await axios.get(`${BASE_URL}/title/${encodeURIComponent(title)}`);
     res.send(JSON.stringify(response.data, null, 4));
   } catch (error) {
     if (error.response && error.response.status === 404) {
