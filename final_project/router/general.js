@@ -7,6 +7,10 @@ const public_users = express.Router();
 
 const BASE_URL = "http://localhost:5000";
 
+// ============================================
+// SYNCHRONOUS ROUTES (Tasks 1-5)
+// ============================================
+
 // Get the book list available in the shop
 public_users.get('/', function (req, res) {
   res.send(JSON.stringify(books, null, 4));
@@ -72,8 +76,8 @@ public_users.get('/review/:isbn', function (req, res) {
 // TASKS 10-13: Using Async-Await with Axios
 // ============================================
 
-// Task 10: Get all books using async callback with Axios
-public_users.get('/async', async function (req, res) {
+// Task 10: Get all books - using async/await with Axios
+public_users.get('/async/books', async function (req, res) {
   try {
     const response = await axios.get(`${BASE_URL}/`);
     res.send(JSON.stringify(response.data, null, 4));
@@ -82,7 +86,7 @@ public_users.get('/async', async function (req, res) {
   }
 });
 
-// Task 11: Search by ISBN using async callback with Axios
+// Task 11: Get book by ISBN - using async/await with Axios
 public_users.get('/async/isbn/:isbn', async function (req, res) {
   try {
     const isbn = req.params.isbn;
@@ -97,7 +101,7 @@ public_users.get('/async/isbn/:isbn', async function (req, res) {
   }
 });
 
-// Task 12: Search by Author using async callback with Axios
+// Task 12: Get books by Author - using async/await with Axios
 public_users.get('/async/author/:author', async function (req, res) {
   try {
     const author = req.params.author;
@@ -112,7 +116,7 @@ public_users.get('/async/author/:author', async function (req, res) {
   }
 });
 
-// Task 13: Search by Title using async callback with Axios
+// Task 13: Get books by Title - using async/await with Axios  
 public_users.get('/async/title/:title', async function (req, res) {
   try {
     const title = req.params.title;
@@ -126,5 +130,3 @@ public_users.get('/async/title/:title', async function (req, res) {
     }
   }
 });
-
-module.exports.general = public_users;
